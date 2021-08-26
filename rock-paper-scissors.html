@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock Paper Scissors</title>
+    <meta charset="UTF-8"/>
+</head>
+
+<body>
+
+    <script>
+
+        const options = ['rock', 'paper', 'scissors'];
+       
+        function computer_play(){
+           return options[Math.floor(Math.random()*3)];
+        }
+        
+        function play_round(player_selection, computer_selection){
+           
+            let tie = 'It\'s a tie!';
+            let lose = 'You lose! ' + computer_selection.charAt(0).
+                toUpperCase()+ computer_selection.slice(1) +
+            ' beats ' + player_selection.charAt(0).toUpperCase()
+                + player_selection.slice(1) ;
+            let win = 'You win! ' + player_selection.charAt(0).
+                toUpperCase()+ player_selection.slice(1) +
+            ' beats ' + computer_selection.charAt(0).toUpperCase()
+                + computer_selection.slice(1) ;
+
+
+            if (player_selection === options[0]){
+                
+                if(computer_selection === player_selection) return tie;
+                else if(computer_selection === options[1]) return lose;
+                else if(computer_selection === options[2]) return win;
+
+            }else if (player_selection === options[1]){
+                
+                if(computer_selection === player_selection) return tie;
+                else if(computer_selection === options[2]) return lose;
+                else if(computer_selection === options[0]) return win;
+
+            }else if (player_selection === options[2]){
+                
+                if(computer_selection === player_selection) return tie;
+                else if(computer_selection === options[0]) return lose;
+                else if(computer_selection === options[1]) return win;
+            }
+            
+        } 
+        
+        console.log(play_round('rock', computer_play()));
+
+    </script>
+
+</body>
+
+</html>
