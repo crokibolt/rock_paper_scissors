@@ -9,47 +9,92 @@
 
     <script>
 
-        const options = ['rock', 'paper', 'scissors'];
+        const MAX_ROUNDS = 5;
+        const OPTIONS = ['rock', 'paper', 'scissors'];
        
         function computer_play(){
-           return options[Math.floor(Math.random()*3)];
+           return OPTIONS[Math.floor(Math.random()*3)];
         }
         
         function play_round(player_selection, computer_selection){
            
-            let tie = 'It\'s a tie!';
-            let lose = 'You lose! ' + computer_selection.charAt(0).
-                toUpperCase()+ computer_selection.slice(1) +
-            ' beats ' + player_selection.charAt(0).toUpperCase()
-                + player_selection.slice(1) ;
-            let win = 'You win! ' + player_selection.charAt(0).
-                toUpperCase()+ player_selection.slice(1) +
-            ' beats ' + computer_selection.charAt(0).toUpperCase()
-                + computer_selection.slice(1) ;
+            let tie = 'tie';
+            let lose = 'lose'; 
+            let win = 'win';
 
 
-            if (player_selection === options[0]){
+            if (player_selection === OPTIONS[0]){
                 
                 if(computer_selection === player_selection) return tie;
-                else if(computer_selection === options[1]) return lose;
-                else if(computer_selection === options[2]) return win;
+                else if(computer_selection === OPTIONS[1]) return lose;
+                else if(computer_selection === OPTIONS[2]) return win;
 
-            }else if (player_selection === options[1]){
+            }else if (player_selection === OPTIONS[1]){
                 
                 if(computer_selection === player_selection) return tie;
-                else if(computer_selection === options[2]) return lose;
-                else if(computer_selection === options[0]) return win;
+                else if(computer_selection === OPTIONS[2]) return lose;
+                else if(computer_selection === OPTIONS[0]) return win;
 
-            }else if (player_selection === options[2]){
+            }else if (player_selection === OPTIONS[2]){
                 
                 if(computer_selection === player_selection) return tie;
-                else if(computer_selection === options[0]) return lose;
-                else if(computer_selection === options[1]) return win;
+                else if(computer_selection === OPTIONS[0]) return lose;
+                else if(computer_selection === OPTIONS[1]) return win;
             }
             
         } 
         
-        console.log(play_round('rock', computer_play()));
+        function game(){
+
+            let player_sel;
+            let rounds_won = 0;
+            let rounds_ lost = 0;
+
+            for(let i=0; i<MAX_ROUNDS; i++){
+                
+               player_sel = window.prompt('Do you pick Rock, Paper or Scissors?').toLowerCase(); 
+
+               let round_result = play_round(player_sel, computer_play());
+
+               if (round_result === 'win'){
+                   rounds_won++;
+                  
+                   console.log(`Player wins round %{i}. Score\
+                       is Player: %{rounds_won} - Computer:  %{rounds_lost}`);
+
+               }else if(round_result === 'lost'){
+                   
+                   rounds_lost++;
+
+                   console.log(`Computer wins round %{i}. Score\
+                       is Player: %{rounds_won} - Computer: %{rounds_lost}`);
+               
+               }else if(round_result === 'tie'){
+
+                 i--;
+                 console.log(`Round %{i+1} is a tie. Score\
+                     is Player: %{rounds_won} - Computer: %{rounds_lost});
+               }
+            }
+
+            if (rounds_won > rounds_lost){
+                
+                console.log('Player won with a score of '+ rounds_won+ ':'
+                    + rounds_lost);
+
+            }else if(rounds_won < rounds_lost){
+                
+                console.log('Computer won with a score of '+ rounds_won+ ':'
+                    + rounds_lost);
+
+            }else if(rounds_won === rounds_lost){
+                
+                console.log('It is a tie with a score of ' + rounds_won +
+                    ':' + rounds_lost);
+            }
+            
+        }
+
 
     </script>
 
